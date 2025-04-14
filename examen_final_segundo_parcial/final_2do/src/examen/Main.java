@@ -4,12 +4,13 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        String[] opciones = {"Arabigo a Romano", "Romano a Arabigo", "Salir"};
+
         while (true) {
-            String[] opciones = {"Arábigo a Romano", "Romano a Arábigo", "Salir"};
             int eleccion = JOptionPane.showOptionDialog(
                 null,
-                "Seleccione una opción:",
-                "Conversor de Números",
+                "Elige una opcion:",
+                "Conversor de Numeros",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
@@ -17,31 +18,35 @@ public class Main {
                 opciones[0]
             );
 
-            if (eleccion == 2 || eleccion == JOptionPane.CLOSED_OPTION) {
-                break;
-            }
+            if (eleccion == 2 || eleccion == JOptionPane.CLOSED_OPTION) break;
 
             try {
                 if (eleccion == 0) {
-                    String entrada = JOptionPane.showInputDialog("Ingrese un nUmero arábigo (1-50):");
+                    String entrada = JOptionPane.showInputDialog("Escribe un numero arabigo entre 1 y 50:");
                     int numero = Integer.parseInt(entrada);
+
                     if (numero < 1 || numero > 50) {
-                        JOptionPane.showMessageDialog(null, "El número debe estar entre 1 y 50.");
+                        JOptionPane.showMessageDialog(null, "El numero debe estar entre 1 y 50.");
                         continue;
                     }
+
                     String romano = Convertidor.arabigoARomano(numero);
-                    JOptionPane.showMessageDialog(null, "El número romano es: " + romano);
+                    JOptionPane.showMessageDialog(null, "Equivalente en romano: " + romano);
+
                 } else if (eleccion == 1) {
-                    String romano = JOptionPane.showInputDialog("Ingrese un número romano válido (I-L):");
+                    String romano = JOptionPane.showInputDialog("Escribe un numero romano valido (I a L):");
+
                     if (!Convertidor.esRomanoValido(romano)) {
-                        JOptionPane.showMessageDialog(null, "Número romano inválido.");
+                        JOptionPane.showMessageDialog(null, "Numero romano no valido.");
                         continue;
                     }
+
                     int arabigo = Convertidor.romanoAArabigo(romano);
-                    JOptionPane.showMessageDialog(null, "El número arábigo es: " + arabigo);
+                    JOptionPane.showMessageDialog(null, "Equivalente en arabigo: " + arabigo);
                 }
+
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Entrada inválida. Por favor, ingrese un número válido.");
+                JOptionPane.showMessageDialog(null, "Entrada no valida. Ingresa un numero correcto.");
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
